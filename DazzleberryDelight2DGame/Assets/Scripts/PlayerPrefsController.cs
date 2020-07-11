@@ -16,7 +16,6 @@ namespace DBD.Core
             if (volume >= MIN_VOLUME && volume <= MAX_VOLUME)
             {
                 PlayerPrefs.SetFloat(MASTER_VOLUME_KEY, volume);
-                Debug.Log("Master volume set to " + volume);
             }
             else
             {
