@@ -17,6 +17,11 @@ namespace DBD.Player
         // 1 = punching, 2 = lasers
         int currentPower = 1;
 
+        [Header("Punch Parameters")]
+        [SerializeField] GameObject punchImpactPrefab;
+        // [SerializeField] AudioClip punchSound;
+
+
         [Header("Laser Parameters")]
         [SerializeField] GameObject laserPrefab;
         [SerializeField] float laserSpeed = 25f;
@@ -86,7 +91,7 @@ namespace DBD.Player
             {
                 if (currentPower == 1)
                 {
-
+                    GameObject punchImpact = 
                 }
                 else if (currentPower == 2) // currently only lasers exist
                 {
