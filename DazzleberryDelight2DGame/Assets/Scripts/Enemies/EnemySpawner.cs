@@ -7,17 +7,20 @@ namespace DBD.Enemies
     public class EnemySpawner : MonoBehaviour
     {
         [SerializeField] GameObject enemyPrefab;
+        float currentSpawnTimer = 0f;
 
-        // Start is called before the first frame update
-        void Start()
-        {
-            SpawnEnemy();
-        }
 
         // Update is called once per frame
         void Update()
         {
+            float spawnTimer = 1f;
+            currentSpawnTimer += Time.deltaTime;
 
+            if (currentSpawnTimer >= spawnTimer)
+            {
+                SpawnEnemy();
+                currentSpawnTimer = 0f;
+            }
         }
 
         void SpawnEnemy()

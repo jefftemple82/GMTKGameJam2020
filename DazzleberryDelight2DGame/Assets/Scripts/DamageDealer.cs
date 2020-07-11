@@ -5,6 +5,7 @@ using UnityEngine;
 public class DamageDealer : MonoBehaviour
 {
     int damage = 1;
+    int damageType = 1;
 
     public int GetDamage()
     {
