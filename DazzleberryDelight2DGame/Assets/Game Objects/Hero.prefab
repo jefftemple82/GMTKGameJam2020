@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8062931721264633249}
   m_Layer: 0
   m_Name: Hero
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,17 +41,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 6821046665544704707}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea3db0da12b9dfa46b5c3f10cab3d0d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e3e15bd41da4f54882793353c2bad64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
   punchLevel: 1
   laserLevel: 0
   powers: 
-  laserPrefab: {fileID: 7327319615851585137, guid: d528f620d55429d4aa9b4dadf9a4d2ff,
-    type: 3}
+  powerSlider: {fileID: 0}
+  fillSpeed: 0.5
+  punchImpactPrefab: {fileID: 0}
+  punchImpactLocation: {fileID: 0}
+  punchSoundVolume: 0
+  punchFiringPeriod: 1
+  laserPrefab: {fileID: 0}
   laserSpeed: 25
-  laserSound: {fileID: 0}
   laserSoundVolume: 0
   laserFiringPeriod: 0.25
 --- !u!1 &6821046666292479857

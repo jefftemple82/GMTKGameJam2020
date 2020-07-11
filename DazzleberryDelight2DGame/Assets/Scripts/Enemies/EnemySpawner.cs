@@ -8,7 +8,7 @@ namespace DBD.Enemies
     {
         [SerializeField] GameObject enemyPrefab;
         float currentSpawnTimer = 0f;
-
+        [SerializeField] GameObject[] enemyTypes;
 
         // Update is called once per frame
         void Update()

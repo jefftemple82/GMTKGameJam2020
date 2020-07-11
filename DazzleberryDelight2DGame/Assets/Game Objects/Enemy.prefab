@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -293355922262479329}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,6 +84,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 399bf77667f46054fac2c015d497ffa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laserPrefab: {fileID: 7327319615851585137, guid: 545bdb4994d71764e9aecf964e0dbe7e,
+    type: 3}
+  laserSpeed: 15
+  minTimeBetweenShots: 0.5
+  maxTimeBetweenShots: 2
+  laserSoundVolume: 0
 --- !u!114 &-293355922262479329
 MonoBehaviour:
   m_ObjectHideFlags: 0

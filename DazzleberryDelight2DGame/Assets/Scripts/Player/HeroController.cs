@@ -131,7 +131,7 @@ namespace DBD.Player
         private void OnTriggerEnter2D(Collider2D other)
         {
             DamageDealer damageDealer = other.gameObject.GetComponent<DamageDealer>();
-            if (!damageDealer) { return; }
+            if (!damageDealer || other.gameObject.tag == "Player") { return; }
             ProcessHit(damageDealer);
             Destroy(other.gameObject);
         }
