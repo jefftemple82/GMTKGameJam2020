@@ -84,7 +84,11 @@ namespace DBD.Player
         {
             while (true)
             {
-                if (currentPower == 2) // currently only lasers exist
+                if (currentPower == 1)
+                {
+
+                }
+                else if (currentPower == 2) // currently only lasers exist
                 {
                     GameObject laser = Instantiate(
                         laserPrefab,
