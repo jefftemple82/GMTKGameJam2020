@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DamageDealer : MonoBehaviour
 {
-    int damage = 1;
-    int damageType = 1;
+    [SerializeField] int damage = 1;
+    [SerializeField] int damageType = 1;
 
     public int GetDamage()
     {
@@ -16,5 +16,15 @@ public class DamageDealer : MonoBehaviour
     {
         // later we can use this to destroy the projectile
         return;
+    }
+
+    public int GetDamageType()
+    {
+        return damageType;
+    }
+
+    public void DestroyDamageDealer()
+    {
+        Destroy(gameObject);
     }
 }

@@ -7,9 +7,8 @@ namespace DBD.Enemies
 {
     public class Enemy : MonoBehaviour
     {
-        EnemyCounter enemyCounter;
-        float moveSpeed = 10f;
-        int health = 1;
+        [SerializeField] float moveSpeed = 10f;
+        [SerializeField] int health = 1;
 
         [Header("Power Parameters")]
 
@@ -27,7 +26,6 @@ namespace DBD.Enemies
         void Start()
         {
             laserTimer = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
-            enemyCounter = FindObjectOfType<EnemyCounter>();
         }
 
         // Update is called once per frame
@@ -76,7 +74,6 @@ namespace DBD.Enemies
 
         private void Die()
         {
-            enemyCounter.ReduceEnemyCounter();
             Destroy(gameObject);
         }
 
