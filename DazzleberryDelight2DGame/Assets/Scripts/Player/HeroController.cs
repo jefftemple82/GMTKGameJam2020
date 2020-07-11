@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using DBD.Core;
 
 namespace DBD.Player
 {
@@ -14,7 +14,7 @@ namespace DBD.Player
         Coroutine firingCoroutine;
 
         [Header("Poewr parameters")]
-        [SerializeField] int[] powerTypeLevels;
+        [SerializeField] int[] damageTypeLevels;
         // 1 = punching, 2 = lasers
         public float fillSpeed = 0.5f;
         int currentPowerType = 1;
@@ -35,7 +35,7 @@ namespace DBD.Player
         [SerializeField] [Range(0, 1)] float laserSoundVolume;
         [SerializeField] float laserFiringPeriod = 0.25f;
 
-
+        UIManager uiManager;
 
         float padding = 1f;
         float xMin;
@@ -50,6 +50,7 @@ namespace DBD.Player
         {
             SetUpMoveBoundaries();
             currentPowerType = 2; // change this later, for testing certain powers only
+            uiManager = FindObjectOfType<UIManager>();
         }
 
         // Update is called once per frame
@@ -192,56 +193,67 @@ namespace DBD.Player
             if (damageType != currentPowerType)
             {
                 currentPowerType = damageType;
+                damageTypeLevels[damageType - 1]++;
 
-                currentPowerLevel = powerTypeLevels[damageType - 1];
+                currentPowerLevel = damageTypeLevels[damageType - 1];
                 Debug.Log("Damage type changed to " + damageType + " with a power level of " + currentPowerLevel);
             }
             else
             {
-                powerTypeLevels[damageType - 1]++;
-                currentPowerLevel =  powerTypeLevels[damageType - 1];
+                damageTypeLevels[damageType - 1]++;
+                currentPowerLevel =  damageTypeLevels[damageType - 1];
 
                 Debug.Log("Damage type remains " + damageType + " and power level is now " + currentPowerLevel);
 
                 if (currentPowerLevel >= maxPowerLevel)
                 {
-                    OutOfControl(damageType);
+                    OutOfControl();
                     Debug.Log("Triggering OUT OF CONTROL event");
                 }
             }
+
+            uiManager.UpdateEnergyLevels();
         }
 
-        private void OutOfControl(int damageType)
+        private void OutOfControl()
         {
             if (currentPowerType == 1) // punches
             {
+                ResetPowerLevels();
+
                 GameObject deathWave = Instantiate(
                     punchImpactPrefab[currentPowerLevel - 1],
                     transform.position,
                     Quaternion.identity) as GameObject;
-
-                ResetPowerLevels(damageType);
             }
             else if (currentPowerType == 2) // lasers
             {
+                ResetPowerLevels();
+
                 GameObject deathWave = Instantiate(
                     laserPrefab[currentPowerLevel - 1],
                     transform.position,
                     Quaternion.identity) as GameObject;
-
-                ResetPowerLevels(damageType);
             }
         }
 
-        public void ResetPowerLevels(int damageType)
+        private void ResetPowerLevels()
         {
+            damageTypeLevels[0] = 1;
+            damageTypeLevels[1] = 1;
             currentPowerLevel = 1;
-            foreach (int i in powerTypeLevels)
-            {
-                powerTypeLevels[i] = 1;
-            }
 
-            currentPowerLevel = 1;
+            uiManager.UpdateEnergyLevels();
+        }
+
+        public int GetPunchEnergy()
+        {
+            return damageTypeLevels[0];
+        }
+        
+        public int GetLaserEnergy()
+        {
+            return damageTypeLevels[1];
         }
 
     }

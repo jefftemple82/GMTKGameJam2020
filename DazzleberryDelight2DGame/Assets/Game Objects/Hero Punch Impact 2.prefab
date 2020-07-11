@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6592845902476338104}
   - component: {fileID: 8094935241549514127}
   m_Layer: 0
-  m_Name: Hero Punch Impact
+  m_Name: Hero Punch Impact 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9384be4c8338a4b4dbf7b0b1891840f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
+  damageType: 1
 --- !u!58 &-6592845902476338104
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -122,7 +124,7 @@ Animator:
   m_GameObject: {fileID: 9058143214207720254}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 27078ba873783bf4596b88d4b64bf90f, type: 2}
+  m_Controller: {fileID: 9100000, guid: f560a51eb737bc846b18ca79370bcd6c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
