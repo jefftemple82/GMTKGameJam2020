@@ -19,6 +19,11 @@ namespace DBD.Core
 
         }
 
+        public void EndLevel()
+        {
+            LoadNextScene();
+        }
+
         public void LoadNextScene()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

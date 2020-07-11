@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DBD.Core;
 
 namespace DBD.Enemies
 {
     public class Enemy : MonoBehaviour
     {
+        EnemyCounter enemyCounter;
         float moveSpeed = 10f;
         int health = 1;
 
@@ -25,6 +27,7 @@ namespace DBD.Enemies
         void Start()
         {
             laserTimer = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
+            enemyCounter = FindObjectOfType<EnemyCounter>();
         }
 
         // Update is called once per frame
@@ -73,6 +76,7 @@ namespace DBD.Enemies
 
         private void Die()
         {
+            enemyCounter.ReduceEnemyCounter();
             Destroy(gameObject);
         }
 

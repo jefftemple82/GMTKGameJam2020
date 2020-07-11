@@ -50,7 +50,7 @@ namespace DBD.Player
         void Start()
         {
             SetUpMoveBoundaries();
-            currentPower = 1; // change this later, for testing certain powers only
+            currentPower = 2; // change this later, for testing certain powers only
 
             UpdatePowerSlider();
         }
