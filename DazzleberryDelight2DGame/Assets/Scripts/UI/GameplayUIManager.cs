@@ -6,7 +6,7 @@ using DBD.Player;
 
 namespace DBD.Core
 {
-    public class UIManager : MonoBehaviour
+    public class GameplayUIManager : MonoBehaviour
     {
         /*
         [SerializeField] GameObject primaryMenuCanvas;

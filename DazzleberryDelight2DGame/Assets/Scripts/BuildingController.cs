@@ -6,7 +6,7 @@ namespace DBD.Buildings
 {
     public class BuildingController : MonoBehaviour
     {
-        [SerializeField] float moveSpeed = 1f;
+        [SerializeField] float moveSpeed = 2f;
         [SerializeField] int health = 24;
         int halfHealth;
         [SerializeField] GameObject[] buildingPrefabs;

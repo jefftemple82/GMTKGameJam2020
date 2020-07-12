@@ -31,8 +31,8 @@ namespace DBD.Buildings
 
         private float RandomizeSpawnTimer()
         {
-            float minSpawnTimer = 4.75f;
-            float maxSpawnTimer = 6f;
+            float minSpawnTimer = 2.5f;
+            float maxSpawnTimer = 3.25f;
 
             spawnTimer = Random.Range(minSpawnTimer, maxSpawnTimer);
             return spawnTimer;

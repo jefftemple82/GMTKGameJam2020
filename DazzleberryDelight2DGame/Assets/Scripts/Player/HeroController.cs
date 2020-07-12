@@ -36,7 +36,7 @@ namespace DBD.Player
         [SerializeField] [Range(0, 1)] float laserSoundVolume;
         [SerializeField] float laserFiringPeriod = 0.25f;
 
-        UIManager uiManager;
+        GameplayUIManager uiManager;
 
         float padding = 1f;
         float xMin;
@@ -51,7 +51,7 @@ namespace DBD.Player
         {
             SetUpMoveBoundaries();
             currentPowerType = 2; // change this later, for testing certain powers only
-            uiManager = FindObjectOfType<UIManager>();
+            uiManager = FindObjectOfType<GameplayUIManager>();
         }
 
         // Update is called once per frame

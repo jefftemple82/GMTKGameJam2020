@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97d5a84445a61149809b3d24a85f17d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 2
   health: 24
   buildingPrefabs:
   - {fileID: 5972747960198477888}
