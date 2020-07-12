@@ -30,6 +30,7 @@ namespace DBD.Player
 
         [Header("Laser Parameters")]
         [SerializeField] GameObject[] laserPrefab;
+        [SerializeField] Transform laserLocation;
         [SerializeField] float laserSpeed = 25f;
         // [SerializeField] AudioClip laserSound;
         [SerializeField] [Range(0, 1)] float laserSoundVolume;
@@ -147,7 +148,7 @@ namespace DBD.Player
                     {
                         GameObject laser = Instantiate(
                             laserPrefab[currentPowerLevel - 1],
-                            transform.position,
+                            laserLocation.position,
                             Quaternion.identity) as GameObject;
                         laser.GetComponent<Rigidbody2D>().velocity = new Vector2(laserSpeed, 0);
                         // AudioSource.PlayClipAtPoint(laserSound, Camera.main.transform.position, laserSoundVolume);
@@ -157,7 +158,7 @@ namespace DBD.Player
                     {
                         GameObject laser = Instantiate(
                             laserPrefab[currentPowerLevel - 1],
-                            transform.position,
+                            laserLocation.position,
                             Quaternion.identity) as GameObject;
                         laser.GetComponent<Rigidbody2D>().velocity = new Vector2(laserSpeed, 0);
                         // AudioSource.PlayClipAtPoint(laserSound, Camera.main.transform.position, laserSoundVolume);
@@ -167,7 +168,7 @@ namespace DBD.Player
                     {
                         GameObject laser = Instantiate(
                             laserPrefab[currentPowerLevel - 1],
-                            transform.position,
+                            laserLocation.position,
                             Quaternion.identity) as GameObject;
                         laser.GetComponent<Rigidbody2D>().velocity = new Vector2(laserSpeed, 0);
                         // AudioSource.PlayClipAtPoint(laserSound, Camera.main.transform.position, laserSoundVolume);
@@ -219,21 +220,21 @@ namespace DBD.Player
         {
             if (currentPowerType == 1) // punches
             {
-                ResetPowerLevels();
-
                 GameObject deathWave = Instantiate(
                     punchImpactPrefab[currentPowerLevel - 1],
                     transform.position,
                     Quaternion.identity) as GameObject;
+
+                ResetPowerLevels();
             }
             else if (currentPowerType == 2) // lasers
             {
-                ResetPowerLevels();
-
                 GameObject deathWave = Instantiate(
                     laserPrefab[currentPowerLevel - 1],
                     transform.position,
                     Quaternion.identity) as GameObject;
+
+                ResetPowerLevels();
             }
         }
 
