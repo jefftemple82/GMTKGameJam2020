@@ -20,8 +20,8 @@ namespace DBD.Player
         // 1 = punching, 2 = lasers
         public float fillSpeed = 0.5f;
         int currentPowerType = 1;
-        [SerializeField] int currentPowerLevel = 0;
-        [SerializeField] int maxPowerLevel = 10;
+        int currentPowerLevel = 0;
+        int maxPowerLevel = 10;
 
         [Header("Punch Parameters")]
         [SerializeField] GameObject[] punchImpactPrefab;

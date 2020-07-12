@@ -7,6 +7,8 @@ namespace DBD.Core
 {
     public class GameManager : MonoBehaviour
     {
+        int cityHealth = 10;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -17,6 +19,18 @@ namespace DBD.Core
         void Update()
         {
 
+        }
+
+        public int GetCityHealth()
+        {
+            return cityHealth;
+        }
+
+        public void GameOver()
+        {
+            Time.timeScale = 0;
+
+            Debug.Log("GAME OVER!");
         }
 
         public void EndLevel()

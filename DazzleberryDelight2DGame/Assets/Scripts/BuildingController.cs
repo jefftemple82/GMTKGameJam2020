@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DBD.Core;
 
 namespace DBD.Buildings
 {
     public class BuildingController : MonoBehaviour
     {
+        GameplayUIManager gameplayUIManager;
+
         [SerializeField] float moveSpeed = 2f;
         [SerializeField] int health = 24;
         int halfHealth;
@@ -17,6 +20,8 @@ namespace DBD.Buildings
         // Start is called before the first frame update
         void Start()
         {
+            gameplayUIManager = FindObjectOfType<GameplayUIManager>();
+
             buildingPrefabs[0].SetActive(true);
             buildingPrefabs[1].SetActive(false);
             buildingPrefabs[2].SetActive(false);
@@ -59,6 +64,7 @@ namespace DBD.Buildings
             }
             else if (health <= 0)
             {
+                gameplayUIManager.SubtractCityHealth();
                 buildingPrefabs[1].SetActive(false);
                 buildingPrefabs[2].SetActive(true);
             }

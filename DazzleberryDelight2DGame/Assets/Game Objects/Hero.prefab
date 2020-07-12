@@ -130,8 +130,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00491634, y: 0.010701776}
-  m_Size: {x: 0.5098327, y: 1.6895921}
+  m_Offset: {x: 0.14896727, y: -0.048247457}
+  m_Size: {x: 0.4050684, y: 1.1786988}
   m_Direction: 0
 --- !u!114 &1266086444
 MonoBehaviour:
@@ -148,7 +148,7 @@ MonoBehaviour:
   moveSpeed: 10
   punchLevel: 1
   laserLevel: 0
-  damageTypeLevels: 
+  damageTypeLevels: 0100000001000000
   fillSpeed: 0.5
   punchImpactPrefab:
   - {fileID: 9058143214207720254, guid: 17ee2885272df1741ae4c88113ae6bc2, type: 3}
@@ -156,8 +156,9 @@ MonoBehaviour:
   - {fileID: 9058143214207720254, guid: 57b7757736a19a344af7c010449c2d0b, type: 3}
   - {fileID: 4560921944892182698, guid: 10e69a81178b4d54b99805a13e2cfa9d, type: 3}
   punchImpactLocation: {fileID: 1121983028}
+  punchSound: {fileID: 8300000, guid: 0479b10aa11d14d4688713548d100c34, type: 3}
   punchSoundVolume: 0.6
-  punchFiringPeriod: 1
+  punchFiringPeriod: 0.5
   laserPrefab:
   - {fileID: 7327319615851585137, guid: d528f620d55429d4aa9b4dadf9a4d2ff, type: 3}
   - {fileID: 7327319615851585137, guid: cd9a4213d08cd584ba0ab0cceba9bd13, type: 3}
@@ -237,12 +238,12 @@ SpriteRenderer:
   m_SortingLayerID: -39122255
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e1f69c4499d6fb74999b4c834c2d8b78, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36c116a18b7eb3d41ab7d30286f0869b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 4, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

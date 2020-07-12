@@ -7,10 +7,15 @@ namespace DBD.Core
 {
     public class GameplayUIManager : MonoBehaviour
     {
-        [SerializeField] Text punchEnergyText;
+        GameManager gameManager;
+
+        [SerializeField] Text gameOverText;
         
-        [SerializeField] Slider citySlider;
-        
+        [SerializeField] Slider cityHealthSlider;
+        float cityHealthSliderTarget;
+        float cityHealthSliderDepleteSpeed = 0.5f;
+        [SerializeField] int cityHealth;
+
         [SerializeField] Slider powerSlider;
         float powerSliderTarget;
         float powerSliderFillSpeed = 0.5f;
@@ -24,7 +29,10 @@ namespace DBD.Core
 
             //    CloseMenu();
 
+            gameManager = FindObjectOfType<GameManager>();
+            cityHealth = gameManager.GetCityHealth();
             UpdatePowerLevel(0);
+            UpdateCityHealth();
         }
 
         // Update is called once per frame
@@ -38,6 +46,15 @@ namespace DBD.Core
             {
                 powerSlider.value -= powerSliderFillSpeed * Time.deltaTime;
             }
+
+            if (cityHealthSlider.value > cityHealthSliderTarget)
+            {
+                cityHealthSlider.value -= cityHealthSliderDepleteSpeed * Time.deltaTime;
+            }
+            else if (cityHealthSlider.value < cityHealthSliderTarget)
+            {
+                cityHealthSlider.value += cityHealthSliderDepleteSpeed * Time.deltaTime;
+            }
         }
 
         public void UpdatePowerLevel(int power)
@@ -46,6 +63,24 @@ namespace DBD.Core
 
             powerSliderTarget = currentPowerLevel * 0.1f;
             Debug.Log("Power Slider Target is " + powerSliderTarget);
+        }
+
+        private void UpdateCityHealth()
+        {
+            cityHealthSliderTarget = cityHealth * 0.1f;
+            Debug.Log("City Health Target is " + cityHealthSliderTarget);
+        }
+
+        public void SubtractCityHealth()
+        {
+            cityHealth--;
+            UpdateCityHealth();
+
+            if (cityHealth <= 0)
+            {
+                gameManager.GameOver();
+                gameOverText.gameObject.SetActive(true);
+            }
         }
 
         public void CloseMenu()
