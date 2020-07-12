@@ -9,17 +9,13 @@ namespace DBD.Core
     {
         GameManager gameManager;
 
-        [SerializeField] Text gameOverText;
-        
-        [SerializeField] Slider cityHealthSlider;
-        float cityHealthSliderTarget;
-        float cityHealthSliderDepleteSpeed = 0.5f;
-        int baseCityHealth;
-        int cityHealth;
-
         [SerializeField] Slider powerSlider;
         float powerSliderTarget;
         float powerSliderFillSpeed = 0.5f;
+
+        [SerializeField] Text timerText;
+        [SerializeField] Text longestOutburstTimerText;
+        [SerializeField] Text shortestOutburstTimerText;
 
         float currentPowerLevel;
 
@@ -31,14 +27,14 @@ namespace DBD.Core
             //    CloseMenu();
 
             gameManager = FindObjectOfType<GameManager>();
-            baseCityHealth = cityHealth = gameManager.GetCityHealth();
             UpdatePowerLevel(0);
-            UpdateCityHealth();
         }
 
         // Update is called once per frame
         void Update()
         {
+            timerText.text = gameManager.GetTimer().ToString("F1");
+
             if (powerSlider.value < powerSliderTarget)
             {
                 powerSlider.value += powerSliderFillSpeed * Time.deltaTime;
@@ -46,15 +42,6 @@ namespace DBD.Core
             else if (powerSlider.value > powerSliderTarget)
             {
                 powerSlider.value -= powerSliderFillSpeed * Time.deltaTime;
-            }
-
-            if (cityHealthSlider.value > cityHealthSliderTarget)
-            {
-                cityHealthSlider.value -= cityHealthSliderDepleteSpeed * Time.deltaTime;
-            }
-            else if (cityHealthSlider.value < cityHealthSliderTarget)
-            {
-                cityHealthSlider.value += cityHealthSliderDepleteSpeed * Time.deltaTime;
             }
         }
 
@@ -66,22 +53,19 @@ namespace DBD.Core
             Debug.Log("Power Slider Target is " + powerSliderTarget);
         }
 
-        private void UpdateCityHealth()
-        {
-            cityHealthSliderTarget = cityHealth * baseCityHealth / 100;
-            Debug.Log("City Health Target is " + cityHealthSliderTarget);
-        }
-
         public void SubtractCityHealth()
         {
-            cityHealth--;
-            UpdateCityHealth();
 
-            if (cityHealth <= 0)
-            {
-                gameManager.GameOver();
-                gameOverText.gameObject.SetActive(true);
-            }
+        }
+
+        public void UpdateLongestOutburstTime(float time)
+        {
+            longestOutburstTimerText.text = time.ToString("F1");
+        }
+
+        public void UpdateShortestOutburstTime(float time)
+        {
+            shortestOutburstTimerText.text = time.ToString("F1");
         }
 
         public void CloseMenu()

@@ -7,6 +7,9 @@ namespace DBD.Buildings
     public class BuildingSpawner : MonoBehaviour
     {
         [SerializeField] GameObject[] buildingPrefabs;
+        [SerializeField] float minYOffset = -6f;
+        [SerializeField] float maxYOffset = -2f;
+
         float currentSpawnTimer = 0f;
         float spawnTimer;
 
@@ -41,8 +44,6 @@ namespace DBD.Buildings
         private void SpawnBuilding()
         {
             int spawnNumber = 0; // adjust this later to spawn random buildings
-            float minYOffset = -6f;
-            float maxYOffset = 0f;
             float yOffset = Random.Range((int)minYOffset, (int)maxYOffset);
             Vector3 spawnLocation = new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z);
 

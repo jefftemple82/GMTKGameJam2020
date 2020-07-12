@@ -7,7 +7,7 @@ namespace DBD.Enemies
 {
     public class Enemy : MonoBehaviour
     {
-        [SerializeField] float moveSpeed = 10f;
+        [SerializeField] float moveSpeedModifier = 1f;
         [SerializeField] int health = 1;
 
         [Header("Power Parameters")]
@@ -31,6 +31,7 @@ namespace DBD.Enemies
         // Update is called once per frame
         void Update()
         {
+            if (!laserPrefab) { return; }
             CountdownAndShoot();
         }
 
@@ -82,7 +83,7 @@ namespace DBD.Enemies
 
         public float GetMoveSpeed()
         {
-            return moveSpeed;
+            return moveSpeedModifier;
         }
     }
 }

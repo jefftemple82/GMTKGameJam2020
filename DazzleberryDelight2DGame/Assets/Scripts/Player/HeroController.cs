@@ -7,6 +7,7 @@ namespace DBD.Player
 {
     public class HeroController : MonoBehaviour
     {
+        GameManager gameManager;
         GameplayUIManager gameplayUIManager;
 
         [SerializeField] float moveSpeed = 10f;
@@ -51,6 +52,7 @@ namespace DBD.Player
         {
             SetUpMoveBoundaries();
             currentPowerType = 1; // change this later, for testing certain powers only
+            gameManager = FindObjectOfType<GameManager>();
             gameplayUIManager = FindObjectOfType<GameplayUIManager>();
         }
 
@@ -219,6 +221,7 @@ namespace DBD.Player
                     Quaternion.identity) as GameObject;
 
                 ResetPowerLevels();
+                Destroy(deathWave, 1f);
             }
             else if (currentPowerType == 2) // lasers
             {
@@ -235,17 +238,13 @@ namespace DBD.Player
         {
             currentPowerLevel = 1;
 
+            gameManager.ResetOutburstClock();
             gameplayUIManager.UpdatePowerLevel(currentPowerLevel - 1);
         }
 
-        public int GetPunchEnergy()
+        public int GetPowerVelocityModifier()
         {
-            return damageTypeLevels[0];
-        }
-        
-        public int GetLaserEnergy()
-        {
-            return damageTypeLevels[1];
+            return currentPowerLevel;
         }
 
     }

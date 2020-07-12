@@ -64,7 +64,6 @@ namespace DBD.Buildings
             }
             else if (health <= 0)
             {
-                gameplayUIManager.SubtractCityHealth();
                 buildingPrefabs[1].SetActive(false);
                 buildingPrefabs[2].SetActive(true);
             }
