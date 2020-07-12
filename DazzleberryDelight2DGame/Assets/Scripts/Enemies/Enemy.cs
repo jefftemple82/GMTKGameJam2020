@@ -7,6 +7,8 @@ namespace DBD.Enemies
 {
     public class Enemy : MonoBehaviour
     {
+        GameManager gameManager;
+
         [SerializeField] float moveSpeedModifier = 1f;
         [SerializeField] int health = 1;
 
@@ -25,6 +27,7 @@ namespace DBD.Enemies
         // Start is called before the first frame update
         void Start()
         {
+            gameManager = FindObjectOfType<GameManager>();
             laserTimer = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
         }
 
@@ -59,7 +62,7 @@ namespace DBD.Enemies
         private void OnTriggerEnter2D(Collider2D other)
         {
             DamageDealer damageDealer = other.gameObject.GetComponent<DamageDealer>();
-            if (!damageDealer || other.gameObject.tag == "Enemy") { return; }
+            if (!damageDealer || other.gameObject.tag == "Enemy" || other.gameObject.tag == "Enemy Projectile") { return; }
 
             Debug.Log(gameObject.transform.name + " collided with " + other.gameObject.transform.name);
 
@@ -78,6 +81,7 @@ namespace DBD.Enemies
 
         private void Die()
         {
+            gameManager.SubtractAlien();
             Destroy(gameObject);
         }
 

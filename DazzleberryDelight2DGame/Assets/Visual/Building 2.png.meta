@@ -11,6 +11,18 @@ TextureImporter:
   - first:
       213: -2990983049343909109
     second: Building 2_2
+  - first:
+      213: 9192133382104194262
+    second: Building 2_0
+  - first:
+      213: 7517550280381950854
+    second: Building 2_1
+  - first:
+      213: 8366034045382900756
+    second: Building 2_2
+  - first:
+      213: -3901362204696909599
+    second: Building 2_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -54,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -123,10 +135,10 @@ TextureImporter:
       name: Building 2_0
       rect:
         serializedVersion: 2
-        x: 12
-        y: 50
-        width: 29
-        height: 50
+        x: 0
+        y: 500
+        width: 500
+        height: 500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,8 +146,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4802f7bf0b398ece0800000000000000
-      internalID: -1375687297818746748
+      spriteID: 6dc9458eb94019f70800000000000000
+      internalID: 9192133382104194262
       vertices: []
       indices: 
       edges: []
@@ -144,10 +156,10 @@ TextureImporter:
       name: Building 2_1
       rect:
         serializedVersion: 2
-        x: 62
-        y: 50
-        width: 29
-        height: 50
+        x: 500
+        y: 500
+        width: 500
+        height: 500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f214d6f95b2e388b0800000000000000
-      internalID: -5151024279090020049
+      spriteID: 68bed4b7624b35860800000000000000
+      internalID: 7517550280381950854
       vertices: []
       indices: 
       edges: []
@@ -165,10 +177,10 @@ TextureImporter:
       name: Building 2_2
       rect:
         serializedVersion: 2
-        x: 12
+        x: 0
         y: 0
-        width: 29
-        height: 22
+        width: 500
+        height: 500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,8 +188,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0344a673c4ed76d0800000000000000
-      internalID: -2990983049343909109
+      spriteID: 41c3fdd93af1a1470800000000000000
+      internalID: 8366034045382900756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Building 2_3
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 0
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e8e7e0ceb39bd9c0800000000000000
+      internalID: -3901362204696909599
       vertices: []
       indices: 
       edges: []

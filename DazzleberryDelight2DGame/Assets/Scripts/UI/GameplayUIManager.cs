@@ -16,6 +16,10 @@ namespace DBD.Core
         [SerializeField] Text timerText;
         [SerializeField] Text longestOutburstTimerText;
         [SerializeField] Text shortestOutburstTimerText;
+        [SerializeField] Text alienCounterText;
+        [SerializeField] Text damagesText;
+
+        int damages = 0;
 
         float currentPowerLevel;
 
@@ -27,7 +31,9 @@ namespace DBD.Core
             //    CloseMenu();
 
             gameManager = FindObjectOfType<GameManager>();
+            powerSlider.value = 1;
             UpdatePowerLevel(0);
+            UpdateDamages(damages);
         }
 
         // Update is called once per frame
@@ -35,22 +41,34 @@ namespace DBD.Core
         {
             timerText.text = gameManager.GetTimer().ToString("F1");
 
-            if (powerSlider.value < powerSliderTarget)
-            {
-                powerSlider.value += powerSliderFillSpeed * Time.deltaTime;
-            }
-            else if (powerSlider.value > powerSliderTarget)
+            if (powerSlider.value > powerSliderTarget)
             {
                 powerSlider.value -= powerSliderFillSpeed * Time.deltaTime;
+            }
+            else if (powerSlider.value < powerSliderTarget)
+            {
+                powerSlider.value += powerSliderFillSpeed * Time.deltaTime;
             }
         }
 
         public void UpdatePowerLevel(int power)
         {
-            int currentPowerLevel = power;
+            int currentPowerLevel = 10 - power;
 
             powerSliderTarget = currentPowerLevel * 0.1f;
             Debug.Log("Power Slider Target is " + powerSliderTarget);
+        }
+
+        public void UpdateAlienCount(int aliens)
+        {
+            alienCounterText.text = aliens.ToString();
+        }
+
+        public void UpdateDamages(int money)
+        {
+            damages += money;
+            int negativeMoney = -damages;
+            damagesText.text = negativeMoney.ToString();
         }
 
         public void SubtractCityHealth()

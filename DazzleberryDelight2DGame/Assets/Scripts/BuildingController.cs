@@ -9,11 +9,14 @@ namespace DBD.Buildings
     {
         GameplayUIManager gameplayUIManager;
 
+        [SerializeField] int cashValue;
         [SerializeField] float moveSpeed = 2f;
+        [SerializeField] float fallSpeed = 1f;
         [SerializeField] int health = 24;
         int halfHealth;
         [SerializeField] GameObject[] buildingPrefabs;
         bool destructionStage0, destructionStage1;
+        bool notDestroyed = true;
 
 
 
@@ -40,19 +43,27 @@ namespace DBD.Buildings
         private void OnTriggerEnter2D(Collider2D other)
         {
             DamageDealer damageDealer = other.gameObject.GetComponent<DamageDealer>();
-            if (!damageDealer || other.gameObject.tag == "Enemy") { return; }
+            if (!damageDealer) { return; }
 
-            int damage = damageDealer.GetDamage();
-            // if (damage <= 1 || health <= 0) { return; }
+            if (other.gameObject.tag == "Player Attack")
+            {
+                int damage = damageDealer.GetDamage();
+                // if (damage <= 1 || health <= 0) { return; }
 
-            Debug.Log(gameObject.transform.name + " collided with " + other.gameObject.transform.name);
-
-            ProcessHit(damage);
+                if (notDestroyed)
+                {
+                    ProcessHit(damage);
+                }
+                else { return; }
+            }
         }
 
         private void ProcessHit(int damage)
         {
             health -= damage;
+            float damages = cashValue / damage;
+            int intDamages = (int)damages;
+            gameplayUIManager.UpdateDamages(intDamages);
 
             if (health <= halfHealth && destructionStage0 == true)
             {
@@ -66,6 +77,10 @@ namespace DBD.Buildings
             {
                 buildingPrefabs[1].SetActive(false);
                 buildingPrefabs[2].SetActive(true);
+
+                notDestroyed = false;
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, -fallSpeed);
+                Destroy(gameObject, 10f);
             }
         }
 

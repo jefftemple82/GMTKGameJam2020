@@ -13,13 +13,16 @@ namespace DBD.Core
         float longestTimeSinceOutburst = 0f;
         float shortestTimeSinceOutburst = 0f;
 
+        [SerializeField] int alientsToKill = 100;
+
         // Start is called before the first frame update
         void Start()
         {
-            DontDestroyOnLoad(this);
+            // DontDestroyOnLoad(this);
             gameplayUIManager = FindObjectOfType<GameplayUIManager>();
             gameplayUIManager.UpdateLongestOutburstTime(longestTimeSinceOutburst);
             gameplayUIManager.UpdateShortestOutburstTime(shortestTimeSinceOutburst);
+            gameplayUIManager.UpdateAlienCount(alientsToKill);
         }
 
         // Update is called once per frame
@@ -48,6 +51,17 @@ namespace DBD.Core
         public float GetTimer()
         {
             return timeSinceLastOutburst;
+        }
+
+        public void SubtractAlien()
+        {
+            alientsToKill--;
+            gameplayUIManager.UpdateAlienCount(alientsToKill);
+
+            if (alientsToKill <= 0)
+            {
+                GameOver();
+            }
         }
 
         public void GameOver()

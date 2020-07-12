@@ -9,6 +9,7 @@ namespace DBD.Player
     {
         GameManager gameManager;
         GameplayUIManager gameplayUIManager;
+        Rigidbody2D myRigidBody;
 
         [SerializeField] float moveSpeed = 10f;
         [SerializeField] int punchLevel = 1;
@@ -16,13 +17,15 @@ namespace DBD.Player
 
         Coroutine firingCoroutine;
 
-        [Header("Poewr parameters")]
+        [Header("Power parameters")]
         [SerializeField] int[] damageTypeLevels;
         // 1 = punching, 2 = lasers
         public float fillSpeed = 0.5f;
         int currentPowerType = 1;
         int currentPowerLevel = 0;
         int maxPowerLevel = 10;
+        bool facingLeft = false;
+
 
         [Header("Punch Parameters")]
         [SerializeField] GameObject[] punchImpactPrefab;
@@ -45,15 +48,15 @@ namespace DBD.Player
         float yMin;
         float yMax;
 
-
-
         // Start is called before the first frame update
         void Start()
         {
-            SetUpMoveBoundaries();
-            currentPowerType = 1; // change this later, for testing certain powers only
             gameManager = FindObjectOfType<GameManager>();
             gameplayUIManager = FindObjectOfType<GameplayUIManager>();
+            myRigidBody = GetComponent<Rigidbody2D>();
+
+            SetUpMoveBoundaries();
+            currentPowerType = 1; // change this later, for testing certain powers only
         }
 
         // Update is called once per frame
@@ -61,6 +64,7 @@ namespace DBD.Player
         {
             Move();
             Fire();
+            FlipSprite();
         }
 
         void SetUpMoveBoundaries()
@@ -90,6 +94,26 @@ namespace DBD.Player
             var newXPos = Mathf.Clamp(transform.position.x + deltaX, xMin, xMax);
             var newYPos = Mathf.Clamp(transform.position.y + deltaY, yMin, yMax);
             transform.position = new Vector2(newXPos, newYPos);
+
+            if (deltaX < 0)
+            {
+                transform.localScale = new Vector2(-1f, 1f);
+                punchImpactLocation.localScale = new Vector2(-1f, 1f);
+            }
+            else if (deltaX > 0)
+            {
+                transform.localScale = new Vector2(1f, 1f);
+                punchImpactLocation.localScale = new Vector2(1f, 1f);
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void FlipSprite()
+        {
+            
         }
 
         void Fire()
@@ -117,6 +141,7 @@ namespace DBD.Player
                             punchImpactPrefab[0],
                             punchImpactLocation.position,
                             transform.rotation) as GameObject;
+                        punchImpact.transform.localScale = punchImpactLocation.localScale;
                         AudioSource.PlayClipAtPoint(punchSound, Camera.main.transform.position, punchSoundVolume);
                         // punchImpact.transform.parent = gameObject.transform;
                         Destroy(punchImpact, punchFiringPeriod);
@@ -194,7 +219,7 @@ namespace DBD.Player
         private void OnTriggerEnter2D(Collider2D other)
         {
             DamageDealer damageDealer = other.gameObject.GetComponent<DamageDealer>();
-            if (!damageDealer || other.gameObject.tag == "Player") { return; }
+            if (!damageDealer || other.gameObject.tag == "Player Attack") { return; }
             ProcessHit();
             Destroy(other.gameObject);
         }

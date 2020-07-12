@@ -1,28 +1,67 @@
 fileFormatVersion: 2
-guid: f9b7a93ef795a1c45a7d1b45b6c80ce6
+guid: 3a2ec1274f7db0340b117f464bc7fd1b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -466777968856944824
-    second: Building 3_0
+      213: 2674963236897015346
+    second: spritesheet-512px-by197px-per-frame_0
   - first:
-      213: 4573057737250293675
-    second: Building 3_1
+      213: 5774927665694257274
+    second: spritesheet-512px-by197px-per-frame_1
   - first:
-      213: 4059945352588729009
-    second: Building 3_2
+      213: -3168768743062388669
+    second: spritesheet-512px-by197px-per-frame_2
   - first:
-      213: -5807959987448415623
-    second: Building 3_0
+      213: -8518970965889065433
+    second: spritesheet-512px-by197px-per-frame_3
   - first:
-      213: -8430017400599788834
-    second: Building 3_1
+      213: 3520878607599290279
+    second: spritesheet-512px-by197px-per-frame_4
   - first:
-      213: 7744686058087820659
-    second: Building 3_2
+      213: -7575868356174348271
+    second: spritesheet-512px-by197px-per-frame_5
   - first:
-      213: 3728773889930749501
-    second: Building 3_3
+      213: -3441566204023454670
+    second: spritesheet-512px-by197px-per-frame_6
+  - first:
+      213: -239772838187323235
+    second: spritesheet-512px-by197px-per-frame_7
+  - first:
+      213: 6828347823863108383
+    second: spritesheet-512px-by197px-per-frame_8
+  - first:
+      213: -810406739750473378
+    second: spritesheet-512px-by197px-per-frame_9
+  - first:
+      213: 7951173276754002483
+    second: spritesheet-512px-by197px-per-frame_10
+  - first:
+      213: -3231242766804999013
+    second: spritesheet-512px-by197px-per-frame_11
+  - first:
+      213: -6215844554525377833
+    second: spritesheet-512px-by197px-per-frame_12
+  - first:
+      213: -979332627974016341
+    second: spritesheet-512px-by197px-per-frame_13
+  - first:
+      213: 1107921511909381546
+    second: spritesheet-512px-by197px-per-frame_14
+  - first:
+      213: -1777892236909711432
+    second: spritesheet-512px-by197px-per-frame_15
+  - first:
+      213: 6591047901344784796
+    second: spritesheet-512px-by197px-per-frame_16
+  - first:
+      213: 1014371982334372771
+    second: spritesheet-512px-by197px-per-frame_17
+  - first:
+      213: -4118575144216038440
+    second: spritesheet-512px-by197px-per-frame_18
+  - first:
+      213: 1142604160538636089
+    second: spritesheet-512px-by197px-per-frame_19
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -66,7 +105,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -132,13 +171,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Building 3_0
+      name: spritesheet-512px-by197px-per-frame_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 560
-        width: 560
-        height: 560
+        y: 197
+        width: 512
+        height: 197
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,20 +185,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97a747ec92bf56fa0800000000000000
-      internalID: -5807959987448415623
+      spriteID: 236c97234e06f1520800000000000000
+      internalID: 2674963236897015346
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Building 3_1
+      name: spritesheet-512px-by197px-per-frame_1
       rect:
         serializedVersion: 2
-        x: 560
-        y: 560
-        width: 560
-        height: 560
+        x: 512
+        y: 197
+        width: 512
+        height: 197
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,20 +206,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed243ea96df820b80800000000000000
-      internalID: -8430017400599788834
+      spriteID: a7038457d1aa42050800000000000000
+      internalID: 5774927665694257274
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Building 3_2
+      name: spritesheet-512px-by197px-per-frame_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 197
+        width: 512
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 340c766fd954604d0800000000000000
+      internalID: -3168768743062388669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-512px-by197px-per-frame_3
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 560
-        height: 560
+        width: 512
+        height: 197
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -188,20 +248,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37dae3dcfe6aa7b60800000000000000
-      internalID: 7744686058087820659
+      spriteID: 72ed05eba0986c980800000000000000
+      internalID: -8518970965889065433
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Building 3_3
+      name: spritesheet-512px-by197px-per-frame_4
       rect:
         serializedVersion: 2
-        x: 560
+        x: 512
         y: 0
-        width: 560
-        height: 560
+        width: 512
+        height: 197
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -209,8 +269,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d36e215d8144fb330800000000000000
-      internalID: 3728773889930749501
+      spriteID: 7a74a3f607cacd030800000000000000
+      internalID: 3520878607599290279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet-512px-by197px-per-frame_5
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1100b156edb1dd690800000000000000
+      internalID: -7575868356174348271
       vertices: []
       indices: 
       edges: []
