@@ -14,7 +14,8 @@ namespace DBD.Core
         [SerializeField] Slider cityHealthSlider;
         float cityHealthSliderTarget;
         float cityHealthSliderDepleteSpeed = 0.5f;
-        [SerializeField] int cityHealth;
+        int baseCityHealth;
+        int cityHealth;
 
         [SerializeField] Slider powerSlider;
         float powerSliderTarget;
@@ -30,7 +31,7 @@ namespace DBD.Core
             //    CloseMenu();
 
             gameManager = FindObjectOfType<GameManager>();
-            cityHealth = gameManager.GetCityHealth();
+            baseCityHealth = cityHealth = gameManager.GetCityHealth();
             UpdatePowerLevel(0);
             UpdateCityHealth();
         }
@@ -67,7 +68,7 @@ namespace DBD.Core
 
         private void UpdateCityHealth()
         {
-            cityHealthSliderTarget = cityHealth * 0.1f;
+            cityHealthSliderTarget = cityHealth * baseCityHealth / 100;
             Debug.Log("City Health Target is " + cityHealthSliderTarget);
         }
 
