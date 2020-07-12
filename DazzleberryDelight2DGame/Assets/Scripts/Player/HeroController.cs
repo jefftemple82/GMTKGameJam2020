@@ -195,11 +195,11 @@ namespace DBD.Player
         {
             DamageDealer damageDealer = other.gameObject.GetComponent<DamageDealer>();
             if (!damageDealer || other.gameObject.tag == "Player") { return; }
-            ProcessHit(damageDealer);
+            ProcessHit();
             Destroy(other.gameObject);
         }
 
-        private void ProcessHit(DamageDealer damageDealer)
+        private void ProcessHit()
         {
             currentPowerLevel++;
             gameplayUIManager.UpdatePowerLevel(currentPowerLevel);
@@ -240,6 +240,17 @@ namespace DBD.Player
 
             gameManager.ResetOutburstClock();
             gameplayUIManager.UpdatePowerLevel(currentPowerLevel - 1);
+        }
+
+        public void AddPowerLevel()
+        {
+            currentPowerLevel++;
+            gameplayUIManager.UpdatePowerLevel(currentPowerLevel);
+
+            if (currentPowerLevel >= maxPowerLevel)
+            {
+                OutOfControl();
+            }
         }
 
         public int GetPowerVelocityModifier()

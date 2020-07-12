@@ -63,6 +63,7 @@ namespace DBD.Enemies
 
             float xDirection = Random.Range(xDirectionMin, XDirectionMax);
             float yDirection = Random.Range(yDirectionMin, yDirectionMax);
+            float moveSpeedModifier = enemy.GetComponent<Enemy>().GetMoveSpeed();
 
             float xVelocity = xDirection * enemyXVelocity * timeInducedVelocity * heroPowerInducedVelocity;
             float yVelocity = yDirection * enemyYVelocity * timeInducedVelocity * heroPowerInducedVelocity;

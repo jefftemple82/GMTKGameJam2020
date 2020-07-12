@@ -43,7 +43,7 @@ namespace DBD.Buildings
             if (!damageDealer || other.gameObject.tag == "Enemy") { return; }
 
             int damage = damageDealer.GetDamage();
-            if (damage <= 1 || health <= 0) { return; }
+            // if (damage <= 1 || health <= 0) { return; }
 
             Debug.Log(gameObject.transform.name + " collided with " + other.gameObject.transform.name);
 
