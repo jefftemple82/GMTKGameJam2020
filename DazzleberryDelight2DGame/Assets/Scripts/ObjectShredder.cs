@@ -27,7 +27,6 @@ namespace DBD.Core
         {
             if (other.gameObject.tag == "Enemy")
             {
-                gameplayUIManager.SubtractCityHealth();
                 heroController.AddPowerLevel();
             }
 

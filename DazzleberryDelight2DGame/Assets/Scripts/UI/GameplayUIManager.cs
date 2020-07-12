@@ -14,10 +14,11 @@ namespace DBD.Core
         float powerSliderFillSpeed = 0.5f;
 
         [SerializeField] Text timerText;
-        [SerializeField] Text longestOutburstTimerText;
-        [SerializeField] Text shortestOutburstTimerText;
         [SerializeField] Text alienCounterText;
         [SerializeField] Text damagesText;
+        [SerializeField] Text damagesResultsText;
+        [SerializeField] Text longestOutburstTimerText;
+        [SerializeField] Text escapedAliensText;
 
         int damages = 0;
 
@@ -67,23 +68,13 @@ namespace DBD.Core
         public void UpdateDamages(int money)
         {
             damages += money;
-            int negativeMoney = -damages;
-            damagesText.text = negativeMoney.ToString();
-        }
-
-        public void SubtractCityHealth()
-        {
-
+            Debug.Log("Damages is " + damages);
+            damagesText.text = ("$") + damages.ToString();
         }
 
         public void UpdateLongestOutburstTime(float time)
         {
             longestOutburstTimerText.text = time.ToString("F1");
-        }
-
-        public void UpdateShortestOutburstTime(float time)
-        {
-            shortestOutburstTimerText.text = time.ToString("F1");
         }
 
         public void CloseMenu()

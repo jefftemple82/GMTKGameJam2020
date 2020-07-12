@@ -8,10 +8,11 @@ namespace DBD.Core
     public class GameManager : MonoBehaviour
     {
         GameplayUIManager gameplayUIManager;
+        [SerializeField] GameObject resultsScreen;
+        [SerializeField] GameObject gameplayUIScreen;
 
         float timeSinceLastOutburst = 0f;
         float longestTimeSinceOutburst = 0f;
-        float shortestTimeSinceOutburst = 0f;
 
         [SerializeField] int alientsToKill = 100;
 
@@ -21,8 +22,10 @@ namespace DBD.Core
             // DontDestroyOnLoad(this);
             gameplayUIManager = FindObjectOfType<GameplayUIManager>();
             gameplayUIManager.UpdateLongestOutburstTime(longestTimeSinceOutburst);
-            gameplayUIManager.UpdateShortestOutburstTime(shortestTimeSinceOutburst);
             gameplayUIManager.UpdateAlienCount(alientsToKill);
+
+            gameplayUIScreen.SetActive(true);
+            resultsScreen.SetActive(false);
         }
 
         // Update is called once per frame
@@ -38,13 +41,6 @@ namespace DBD.Core
                 longestTimeSinceOutburst = timeSinceLastOutburst;
                 gameplayUIManager.UpdateLongestOutburstTime(timeSinceLastOutburst);
             }
-
-            if (shortestTimeSinceOutburst == 0 || timeSinceLastOutburst < shortestTimeSinceOutburst)
-            {
-                shortestTimeSinceOutburst = timeSinceLastOutburst;
-                gameplayUIManager.UpdateShortestOutburstTime(timeSinceLastOutburst);
-            }
-
             timeSinceLastOutburst = 0;
         }
 
@@ -68,12 +64,22 @@ namespace DBD.Core
         {
             Time.timeScale = 0;
 
+            gameplayUIScreen.SetActive(false);
+            resultsScreen.SetActive(true);
+
             Debug.Log("GAME OVER!");
         }
 
-        public void EndLevel()
+        public void PlayAgain()
         {
-            LoadNextScene();
+            Time.timeScale = 1;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        public void MainMenu()
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
 
         public void LoadNextScene()
