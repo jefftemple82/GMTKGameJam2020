@@ -41,10 +41,10 @@ namespace DBD.Buildings
         private void SpawnBuilding()
         {
             int spawnNumber = 0; // adjust this later to spawn random buildings
-            float minYOffset = 0f;
-            float maxYOffset = 1.5f;
-            float yOffset = Random.Range(minYOffset, maxYOffset);
-            Vector3 spawnLocation = new Vector3(transform.position.x, transform.position.y - yOffset, transform.position.z);
+            float minYOffset = -6f;
+            float maxYOffset = 0f;
+            float yOffset = Random.Range((int)minYOffset, (int)maxYOffset);
+            Vector3 spawnLocation = new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z);
 
             GameObject building = Instantiate(
                 buildingPrefabs[spawnNumber],

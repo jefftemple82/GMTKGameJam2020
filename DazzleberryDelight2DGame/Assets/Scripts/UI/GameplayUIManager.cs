@@ -2,49 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DBD.Player;
 
 namespace DBD.Core
 {
     public class GameplayUIManager : MonoBehaviour
     {
-        /*
-        [SerializeField] GameObject primaryMenuCanvas;
-        [SerializeField] GameObject optionsMenuCanvas;
-        [SerializeField] GameObject creditsMenuCanvas;
-
-        OptionsController optionsController;
-        */
-
-        HeroController heroController;
-
         [SerializeField] Text punchEnergyText;
-        [SerializeField] Text laserEnergyText;
+        
+        [SerializeField] Slider citySlider;
+        
+        [SerializeField] Slider powerSlider;
+        float powerSliderTarget;
+        float powerSliderFillSpeed = 0.5f;
+
+        float currentPowerLevel;
 
         // Start is called before the first frame update
         void Start()
         {
-            heroController = FindObjectOfType<HeroController>();
             //    optionsController = FindObjectOfType<OptionsController>();
 
             //    CloseMenu();
 
-            UpdateEnergyLevels();
+            UpdatePowerLevel(0);
         }
 
         // Update is called once per frame
         void Update()
         {
-
+            if (powerSlider.value < powerSliderTarget)
+            {
+                powerSlider.value += powerSliderFillSpeed * Time.deltaTime;
+            }
+            else if (powerSlider.value > powerSliderTarget)
+            {
+                powerSlider.value -= powerSliderFillSpeed * Time.deltaTime;
+            }
         }
 
-        public void UpdateEnergyLevels()
+        public void UpdatePowerLevel(int power)
         {
-            int punchEnergy = heroController.GetPunchEnergy();
-            int laserEnergy = heroController.GetLaserEnergy();
-            
-            punchEnergyText.text = punchEnergy.ToString();
-            laserEnergyText.text = laserEnergy.ToString();
+            int currentPowerLevel = power;
+
+            powerSliderTarget = currentPowerLevel * 0.1f;
+            Debug.Log("Power Slider Target is " + powerSliderTarget);
         }
 
         public void CloseMenu()

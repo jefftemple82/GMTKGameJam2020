@@ -59,6 +59,9 @@ namespace DBD.Enemies
         {
             DamageDealer damageDealer = other.gameObject.GetComponent<DamageDealer>();
             if (!damageDealer || other.gameObject.tag == "Enemy") { return; }
+
+            Debug.Log(gameObject.transform.name + " collided with " + other.gameObject.transform.name);
+
             ProcessHit(damageDealer);
         }
 

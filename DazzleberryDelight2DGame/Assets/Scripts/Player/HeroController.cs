@@ -7,6 +7,8 @@ namespace DBD.Player
 {
     public class HeroController : MonoBehaviour
     {
+        GameplayUIManager gameplayUIManager;
+
         [SerializeField] float moveSpeed = 10f;
         [SerializeField] int punchLevel = 1;
         [SerializeField] int laserLevel = 0;
@@ -18,15 +20,15 @@ namespace DBD.Player
         // 1 = punching, 2 = lasers
         public float fillSpeed = 0.5f;
         int currentPowerType = 1;
-        int currentPowerLevel = 1;
-        int maxPowerLevel = 4;
+        [SerializeField] int currentPowerLevel = 0;
+        [SerializeField] int maxPowerLevel = 10;
 
         [Header("Punch Parameters")]
         [SerializeField] GameObject[] punchImpactPrefab;
         [SerializeField] Transform punchImpactLocation;
-        // [SerializeField] AudioClip punchSound;
+        [SerializeField] AudioClip punchSound;
         [SerializeField] [Range(0, 1)] float punchSoundVolume;
-        [SerializeField] float punchFiringPeriod = 1f;
+        [SerializeField] float punchFiringPeriod = 0.5f;
 
         [Header("Laser Parameters")]
         [SerializeField] GameObject[] laserPrefab;
@@ -35,8 +37,6 @@ namespace DBD.Player
         // [SerializeField] AudioClip laserSound;
         [SerializeField] [Range(0, 1)] float laserSoundVolume;
         [SerializeField] float laserFiringPeriod = 0.25f;
-
-        GameplayUIManager uiManager;
 
         float padding = 1f;
         float xMin;
@@ -50,8 +50,8 @@ namespace DBD.Player
         void Start()
         {
             SetUpMoveBoundaries();
-            currentPowerType = 2; // change this later, for testing certain powers only
-            uiManager = FindObjectOfType<GameplayUIManager>();
+            currentPowerType = 1; // change this later, for testing certain powers only
+            gameplayUIManager = FindObjectOfType<GameplayUIManager>();
         }
 
         // Update is called once per frame
@@ -109,38 +109,45 @@ namespace DBD.Player
                 if (currentPowerType == 1) // punching
                 {
                     if (currentPowerLevel >= maxPowerLevel) { yield return null; }
-                    else if (currentPowerLevel == 1)
+                    else if (currentPowerLevel >= 0 && currentPowerLevel <= 3)
                     {
                         GameObject punchImpact = Instantiate(
-                            punchImpactPrefab[currentPowerLevel - 1],
+                            punchImpactPrefab[0],
                             punchImpactLocation.position,
-                            Quaternion.identity) as GameObject;
-                        // AudioSource.PlayClipAtPoint(punchSound, Camera.main.transform.position, punchSoundVolume);
-                        punchImpact.transform.parent = gameObject.transform;
+                            transform.rotation) as GameObject;
+                        AudioSource.PlayClipAtPoint(punchSound, Camera.main.transform.position, punchSoundVolume);
+                        // punchImpact.transform.parent = gameObject.transform;
+                        Destroy(punchImpact, punchFiringPeriod);
+
                         yield return new WaitForSeconds(punchFiringPeriod);
                     }
-                    else if (currentPowerLevel == 2)
+                    else if (currentPowerLevel >= 4 && currentPowerLevel <= 6)
                     {
                         GameObject punchImpact = Instantiate(
-                            punchImpactPrefab[currentPowerLevel - 1],
+                            punchImpactPrefab[1],
                             punchImpactLocation.position,
                             Quaternion.identity) as GameObject;
-                        // AudioSource.PlayClipAtPoint(punchSound, Camera.main.transform.position, punchSoundVolume);
-                        punchImpact.transform.parent = gameObject.transform;
+                        AudioSource.PlayClipAtPoint(punchSound, Camera.main.transform.position, punchSoundVolume);
+                        // punchImpact.transform.parent = gameObject.transform;
+                        Destroy(punchImpact, punchFiringPeriod);
+
                         yield return new WaitForSeconds(punchFiringPeriod);
                     }
-                    else if (currentPowerLevel == 3)
+                    else if (currentPowerLevel >= 7 && currentPowerLevel <= 9)
                     {
                         GameObject punchImpact = Instantiate(
-                            punchImpactPrefab[currentPowerLevel - 1],
+                            punchImpactPrefab[2],
                             punchImpactLocation.position,
                             Quaternion.identity) as GameObject;
-                        // AudioSource.PlayClipAtPoint(punchSound, Camera.main.transform.position, punchSoundVolume);
-                        punchImpact.transform.parent = gameObject.transform;
+                        AudioSource.PlayClipAtPoint(punchSound, Camera.main.transform.position, punchSoundVolume);
+                        // punchImpact.transform.parent = gameObject.transform;
+                        Destroy(punchImpact, punchFiringPeriod);
+
                         yield return new WaitForSeconds(punchFiringPeriod);
                     }
 
                 }
+                /*
                 else if (currentPowerType == 2) // lasers
                 {
                     if (currentPowerLevel >= maxPowerLevel) { yield return null; }
@@ -152,6 +159,8 @@ namespace DBD.Player
                             Quaternion.identity) as GameObject;
                         laser.GetComponent<Rigidbody2D>().velocity = new Vector2(laserSpeed, 0);
                         // AudioSource.PlayClipAtPoint(laserSound, Camera.main.transform.position, laserSoundVolume);
+                        Destroy(laser, 3f);
+
                         yield return new WaitForSeconds(laserFiringPeriod);
                     }
                     else if (currentPowerLevel == 2)
@@ -176,6 +185,7 @@ namespace DBD.Player
                     }
 
                 }
+                */
             }
         }
 
@@ -189,31 +199,14 @@ namespace DBD.Player
 
         private void ProcessHit(DamageDealer damageDealer)
         {
-            int damageType = damageDealer.GetDamageType();
+            currentPowerLevel++;
+            gameplayUIManager.UpdatePowerLevel(currentPowerLevel);
 
-            if (damageType != currentPowerType)
-            {
-                currentPowerType = damageType;
-                damageTypeLevels[damageType - 1]++;
-
-                currentPowerLevel = damageTypeLevels[damageType - 1];
-                Debug.Log("Damage type changed to " + damageType + " with a power level of " + currentPowerLevel);
-            }
-            else
-            {
-                damageTypeLevels[damageType - 1]++;
-                currentPowerLevel =  damageTypeLevels[damageType - 1];
-
-                Debug.Log("Damage type remains " + damageType + " and power level is now " + currentPowerLevel);
-
-                if (currentPowerLevel >= maxPowerLevel)
+            if (currentPowerLevel >= maxPowerLevel)
                 {
                     OutOfControl();
                     Debug.Log("Triggering OUT OF CONTROL event");
                 }
-            }
-
-            uiManager.UpdateEnergyLevels();
         }
 
         private void OutOfControl()
@@ -221,7 +214,7 @@ namespace DBD.Player
             if (currentPowerType == 1) // punches
             {
                 GameObject deathWave = Instantiate(
-                    punchImpactPrefab[currentPowerLevel - 1],
+                    punchImpactPrefab[3],
                     transform.position,
                     Quaternion.identity) as GameObject;
 
@@ -240,11 +233,9 @@ namespace DBD.Player
 
         private void ResetPowerLevels()
         {
-            damageTypeLevels[0] = 1;
-            damageTypeLevels[1] = 1;
             currentPowerLevel = 1;
 
-            uiManager.UpdateEnergyLevels();
+            gameplayUIManager.UpdatePowerLevel(currentPowerLevel - 1);
         }
 
         public int GetPunchEnergy()
