@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97d5a84445a61149809b3d24a85f17d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cashValue: 1173000
+  cashValue: 500000
   moveSpeed: 2
   fallSpeed: 1
   health: 24
@@ -219,6 +219,8 @@ MonoBehaviour:
   - {fileID: 5972747960198477888}
   - {fileID: 5972747959571574372}
   - {fileID: 5972747959196337429}
+  smashSound: {fileID: 8300000, guid: 6904a546ba0d8d44982a6dabf195e9f1, type: 3}
+  smashSoundVolume: 0.6
 --- !u!61 &5972747960186049311
 BoxCollider2D:
   m_ObjectHideFlags: 0

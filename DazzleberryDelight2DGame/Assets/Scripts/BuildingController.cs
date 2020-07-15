@@ -17,7 +17,8 @@ namespace DBD.Buildings
         [SerializeField] GameObject[] buildingPrefabs;
         bool destructionStage0, destructionStage1;
         bool notDestroyed = true;
-
+        [SerializeField] AudioClip smashSound;
+        [SerializeField] float smashSoundVolume;
 
 
         // Start is called before the first frame update
@@ -62,8 +63,9 @@ namespace DBD.Buildings
         {
             health -= damage;
             float damages = cashValue / damage;
-            int intDamages = (int)damages;
-            gameplayUIManager.UpdateDamages(intDamages);
+            gameplayUIManager.UpdateDamages(damages);
+            AudioSource.PlayClipAtPoint(smashSound, Camera.main.transform.position, smashSoundVolume);
+
 
             if (health <= halfHealth && destructionStage0 == true)
             {

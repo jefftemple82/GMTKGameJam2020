@@ -6,7 +6,19 @@ public class AudioManager : MonoBehaviour
 {
     public void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        SetUpSingleton();
+    }
+
+    private void SetUpSingleton()
+    {
+        if (FindObjectsOfType(GetType()).Length > 1)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     // Start is called before the first frame update

@@ -25,6 +25,8 @@ namespace DBD.Player
         int currentPowerLevel = 0;
         int maxPowerLevel = 10;
         bool facingLeft = false;
+        [SerializeField] AudioClip takeDamage;
+        [SerializeField] [Range(0, 1)] float takeDamageVolume;
 
 
         [Header("Punch Parameters")]
@@ -33,6 +35,8 @@ namespace DBD.Player
         [SerializeField] AudioClip punchSound;
         [SerializeField] [Range(0, 1)] float punchSoundVolume;
         [SerializeField] float punchFiringPeriod = 0.5f;
+        [SerializeField] AudioClip punchDeathWaveSound;
+        [SerializeField] [Range(0, 1)] float punchDeathWaveSoundVolume = 0.6f;
 
         [Header("Laser Parameters")]
         [SerializeField] GameObject[] laserPrefab;
@@ -95,6 +99,7 @@ namespace DBD.Player
             var newYPos = Mathf.Clamp(transform.position.y + deltaY, yMin, yMax);
             transform.position = new Vector2(newXPos, newYPos);
 
+            /* 
             if (deltaX < 0)
             {
                 transform.localScale = new Vector2(-1f, 1f);
@@ -109,6 +114,7 @@ namespace DBD.Player
             {
                 return;
             }
+            */
         }
 
         private void FlipSprite()
@@ -227,6 +233,7 @@ namespace DBD.Player
         private void ProcessHit()
         {
             currentPowerLevel++;
+            AudioSource.PlayClipAtPoint(takeDamage, Camera.main.transform.position, takeDamageVolume);
             gameplayUIManager.UpdatePowerLevel(currentPowerLevel);
 
             if (currentPowerLevel >= maxPowerLevel)
@@ -244,6 +251,7 @@ namespace DBD.Player
                     punchImpactPrefab[3],
                     transform.position,
                     Quaternion.identity) as GameObject;
+                AudioSource.PlayClipAtPoint(punchDeathWaveSound, Camera.main.transform.position, punchDeathWaveSoundVolume);
 
                 ResetPowerLevels();
                 Destroy(deathWave, 1f);

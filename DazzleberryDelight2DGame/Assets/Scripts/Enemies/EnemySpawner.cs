@@ -21,8 +21,8 @@ namespace DBD.Enemies
         [SerializeField] float yDirectionMax;
         [SerializeField] float enemyXVelocity;
         [SerializeField] float enemyYVelocity;
-        [SerializeField] float timeInducedVelocity = 1f;
-        [SerializeField] float heroPowerInducedVelocity = 1f;
+        float timeInducedVelocity = 1f;
+        float alienInducedVelocity = 1f;
 
         void Start()
         {
@@ -38,11 +38,8 @@ namespace DBD.Enemies
 
         public void SpawnEnemy()
         {
-            timeInducedVelocity = 1 + (gameManager.GetTimer() / 100);
-            heroPowerInducedVelocity = 1 + (heroController.GetPowerVelocityModifier() / 10);
-            Debug.Log("Hero power level is " + heroController.GetPowerVelocityModifier());
-            Debug.Log("Hero power level divided by 10 is " + heroController.GetPowerVelocityModifier() / 10);
-            Debug.Log("Hero power induced velocity should be " + heroPowerInducedVelocity);
+            timeInducedVelocity = 1 + (gameManager.GetTimerCoefficient());
+            alienInducedVelocity = 1 + (gameManager.GetAlienCoefficient());
 
             int index;
 
@@ -65,8 +62,8 @@ namespace DBD.Enemies
             float yDirection = Random.Range(yDirectionMin, yDirectionMax);
             float moveSpeedModifier = enemy.GetComponent<Enemy>().GetMoveSpeed();
 
-            float xVelocity = xDirection * enemyXVelocity * timeInducedVelocity * heroPowerInducedVelocity;
-            float yVelocity = yDirection * enemyYVelocity * timeInducedVelocity * heroPowerInducedVelocity;
+            float xVelocity = xDirection * enemyXVelocity * timeInducedVelocity * alienInducedVelocity;
+            float yVelocity = yDirection * enemyYVelocity * timeInducedVelocity * alienInducedVelocity;
 
             enemy.GetComponent<Rigidbody2D>().velocity = new Vector2(xVelocity, yVelocity);
         }

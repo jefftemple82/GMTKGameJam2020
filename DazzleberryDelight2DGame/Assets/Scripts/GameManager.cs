@@ -14,7 +14,9 @@ namespace DBD.Core
         float timeSinceLastOutburst = 0f;
         float longestTimeSinceOutburst = 0f;
 
-        [SerializeField] int alientsToKill = 100;
+        [SerializeField] int aliensToKill = 100;
+        int totalAliens;
+        int aliensKilled = 0;
 
         // Start is called before the first frame update
         void Start()
@@ -22,7 +24,9 @@ namespace DBD.Core
             // DontDestroyOnLoad(this);
             gameplayUIManager = FindObjectOfType<GameplayUIManager>();
             gameplayUIManager.UpdateLongestOutburstTime(longestTimeSinceOutburst);
-            gameplayUIManager.UpdateAlienCount(alientsToKill);
+            gameplayUIManager.UpdateAlienCount(aliensToKill);
+
+            totalAliens = aliensToKill;
 
             gameplayUIScreen.SetActive(true);
             resultsScreen.SetActive(false);
@@ -44,17 +48,23 @@ namespace DBD.Core
             timeSinceLastOutburst = 0;
         }
 
-        public float GetTimer()
+        public float GetTimerCoefficient()
         {
-            return timeSinceLastOutburst;
+            return timeSinceLastOutburst / 100;
+        }
+
+        public float GetAlienCoefficient()
+        {
+            return aliensKilled / totalAliens;
         }
 
         public void SubtractAlien()
         {
-            alientsToKill--;
-            gameplayUIManager.UpdateAlienCount(alientsToKill);
+            aliensToKill--;
+            aliensKilled++;
+            gameplayUIManager.UpdateAlienCount(aliensToKill);
 
-            if (alientsToKill <= 0)
+            if (aliensToKill <= 0)
             {
                 GameOver();
             }
@@ -66,6 +76,9 @@ namespace DBD.Core
 
             gameplayUIScreen.SetActive(false);
             resultsScreen.SetActive(true);
+
+            ResetOutburstClock();
+            gameplayUIManager.SetResultsScreen(longestTimeSinceOutburst);
 
             Debug.Log("GAME OVER!");
         }

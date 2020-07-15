@@ -13,14 +13,17 @@ namespace DBD.Core
         float powerSliderTarget;
         float powerSliderFillSpeed = 0.5f;
 
-        [SerializeField] Text timerText;
+        // [SerializeField] Text timerText;
         [SerializeField] Text alienCounterText;
         [SerializeField] Text damagesText;
         [SerializeField] Text damagesResultsText;
         [SerializeField] Text longestOutburstTimerText;
         [SerializeField] Text escapedAliensText;
+        [SerializeField] GameObject losingControlText;
 
-        int damages = 0;
+        int escapedAliens = 0;
+
+        float damages = 0;
 
         float currentPowerLevel;
 
@@ -35,12 +38,23 @@ namespace DBD.Core
             powerSlider.value = 1;
             UpdatePowerLevel(0);
             UpdateDamages(damages);
+
+            losingControlText.SetActive(false);
         }
 
         // Update is called once per frame
         void Update()
         {
-            timerText.text = gameManager.GetTimer().ToString("F1");
+            if (powerSlider.value <= 0.2)
+            {
+                losingControlText.SetActive(true);
+            }
+            else
+            {
+                losingControlText.SetActive(false);
+            }
+
+            // timerText.text = gameManager.GetTimerCoefficient().ToString("F1");
 
             if (powerSlider.value > powerSliderTarget)
             {
@@ -60,21 +74,35 @@ namespace DBD.Core
             Debug.Log("Power Slider Target is " + powerSliderTarget);
         }
 
+        public void AddEscapedAlien()
+        {
+            escapedAliens++;
+        }
+
         public void UpdateAlienCount(int aliens)
         {
             alienCounterText.text = aliens.ToString();
         }
 
-        public void UpdateDamages(int money)
+        public void UpdateDamages(float money)
         {
             damages += money;
             Debug.Log("Damages is " + damages);
-            damagesText.text = ("$") + damages.ToString();
+            damagesText.text = ("$") + damages.ToString("F2");
         }
 
         public void UpdateLongestOutburstTime(float time)
         {
             longestOutburstTimerText.text = time.ToString("F1");
+        }
+
+        public void SetResultsScreen(float time)
+        {
+
+
+            damagesResultsText.text = ("$") + damages.ToString();
+            longestOutburstTimerText.text = time.ToString("F1");
+            escapedAliensText.text = escapedAliens.ToString();
         }
 
         public void CloseMenu()

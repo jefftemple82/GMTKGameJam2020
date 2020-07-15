@@ -28,6 +28,7 @@ namespace DBD.Core
             if (other.gameObject.tag == "Enemy")
             {
                 heroController.AddPowerLevel();
+                gameplayUIManager.AddEscapedAlien();
             }
 
             Destroy(other.gameObject);

@@ -20,8 +20,11 @@ namespace DBD.Enemies
         float laserTimer;
         [SerializeField] float minTimeBetweenShots = 0.5f;
         [SerializeField] float maxTimeBetweenShots = 2f;
-        // [SerializeField] AudioClip laserSound;
+        [SerializeField] AudioClip laserSound;
         [SerializeField] float laserSoundVolume;
+        float timeInducedVelocity = 1f;
+        float alienInducedVelocity = 1f;
+        [SerializeField] GameObject deathCryPrefab;
 
 
         // Start is called before the first frame update
@@ -50,13 +53,16 @@ namespace DBD.Enemies
 
         void Fire()
         {
+            timeInducedVelocity = 1 + (gameManager.GetTimerCoefficient());
+            alienInducedVelocity = 1 + (gameManager.GetAlienCoefficient());
+
             GameObject laser = Instantiate(
                 laserPrefab,
                 transform.position,
                 Quaternion.identity
                 ) as GameObject;
-            laser.GetComponent<Rigidbody2D>().velocity = new Vector2(-laserSpeed, 0);
-            // AudioSource.PlayClipAtPoint(shootSound, Camera.main.transform.position, laserSoundVolume);
+            laser.GetComponent<Rigidbody2D>().velocity = new Vector2(-laserSpeed * timeInducedVelocity * alienInducedVelocity, 0);
+            AudioSource.PlayClipAtPoint(laserSound, Camera.main.transform.position, laserSoundVolume);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -82,6 +88,12 @@ namespace DBD.Enemies
         private void Die()
         {
             gameManager.SubtractAlien();
+            GameObject deathCry = Instantiate(
+                deathCryPrefab,
+                transform.position,
+                Quaternion.identity
+                ) as GameObject;
+            Destroy(deathCry, 1f);
             Destroy(gameObject);
         }
 

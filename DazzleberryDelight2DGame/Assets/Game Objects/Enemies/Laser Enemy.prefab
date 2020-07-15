@@ -91,7 +91,10 @@ MonoBehaviour:
   laserSpeed: 10
   minTimeBetweenShots: 0.5
   maxTimeBetweenShots: 2
-  laserSoundVolume: 0
+  laserSound: {fileID: 8300000, guid: f6afc88cdd7fa4145a0260910685a707, type: 3}
+  laserSoundVolume: 0.6
+  deathCryPrefab: {fileID: 234582330532064095, guid: 034c908f2ce76ae459217c6b3e1cea56,
+    type: 3}
 --- !u!114 &-293355922262479329
 MonoBehaviour:
   m_ObjectHideFlags: 0
